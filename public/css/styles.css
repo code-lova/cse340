@@ -1,6 +1,296 @@
-/******* Change Box Model ***************/
-*,
-*:before,
-*:after {
+/* ===============================
+   Global Styles (Mobile-First)
+   =============================== */
+:root {
+  --primary-blue: #1e3a8a; /* Deep Metallic Blue */
+  --secondary-blue: #8ca6db; /* Lighter Silver-Blue */
+  --accent-silver: #c0c0c0; /* Classic Silver */
+  --light-bg: #fff; /* light Background */
+  --light-text: #ffff; /* Light white Text */
+  --btn-hover: #0d2565;
+  --font-body: "Roboto", sans-serif;
+}
+
+* {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  color: var(--btn-hover);
+  font-size: 1.3rem;
+}
+
+body {
+  font-family: var(--font-body);
+  background: url('../images/site/small_check.jpg') no-repeat center center fixed;
+  background-color: var(--light-bg);
+  color: var(--light-text);
+  line-height: 1.6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+#wrapper {
+  width: 100%;
+  background: var(--light-bg);
+  border: 3px solid var(--primary-blue);
+  border-radius: 10px;
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+/* ===============================
+     Header & Navigation
+  =============================== */
+header {
+  background: var(--light-bg);
+  padding: 15px;
+  text-align: left;
+  color: var(--primary-blue);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header a {
+  color: var(--primary-blue);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.siteName {
+  font-size: 30px;
+}
+
+nav {
+  background: var(--btn-hover);
+  padding: 10px;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+nav ul li {
+  display: inline;
+  font-weight: bold;
+  color: var(--light-text);
+  cursor: pointer;
+}
+
+/* ===============================
+     Main Content
+ =============================== */
+main {
+  padding: 10px;
+}
+
+#featured-vehicle {
+  background: var(--light-bg);
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+}
+
+#featured-vehicle h2 {
+  color: var(--primary-blue);
+  font-size: 15px;
+}
+
+#featured-vehicle ul {
+  list-style: none;
+}
+
+#featured-vehicle ul li {
+  color: var(--btn-hover);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+#featured-vehicle img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 10px auto;
+}
+
+.delorean-details {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 10px;
+  border-radius: 10px;
+  backdrop-filter: blur(3px);
+  position: absolute;
+  top: 40%;
+  left: 21%;
+  transform: translate(-50%, -50%);
+  width: 45%;
+  max-width: 200px;
+  text-align: left;
+}
+
+.btn {
+  display: inline-block;
+  background: var(--primary-blue);
+  color: var(--light-text);
+  padding: 8px 10px;
+  text-decoration: none;
+  border-radius: 5px;
+  margin-top: 5px;
+}
+
+.btn:hover {
+  background: var(--btn-hover);
+}
+
+/* ===============================
+     Delorean Reviews
+  =============================== */
+#delorean-reviews {
+  background: var(--primary-blue);
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: space-between;
+  padding: 15px;
+  border-radius: 10px;
+  margin-top: 20px;
+  height: auto;
+}
+
+#delorean-reviews h2 {
+  color: var(--light-text);
+}
+
+.delorean-text ul {
+  padding-left: 13px;
+}
+
+.delorean-text ul li {
+  margin-top: 6px;
+  font-size: 1.1rem;
+  letter-spacing: 1.2px;
+  margin-bottom: 10px;
+  line-height: 2;
+}
+
+/* ===============================
+     Delorean Upgrades Grid
+  =============================== */
+#delorean-upgrades {
+  margin-top: 0px;
+  margin-bottom: 20px;
+}
+
+.upgrade-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.upgrade-item {
+  background: var(--accent-silver);
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+  margin-top: 5px;
+}
+
+.upgrade-item img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.upgrade-item a {
+  display: block;
+  text-decoration: none;
+  color: var(--btn-hover);
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+/* ===============================
+     Footer
+  =============================== */
+footer {
+  text-align: center;
+  padding: 15px;
+  background: var(--primary-blue);
+  color: var(--light-text);
+  margin-top: 20px;
+}
+
+/* ===============================
+  Media Queries (Larger Screens)
+  =============================== */
+@media (min-width: 768px) {
+  h1 {
+    color: var(--btn-hover);
+    font-size: 2.1rem;
+  }
+
+  nav ul {
+    justify-content: space-evenly;
+  }
+
+  #featured-vehicle {
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  #featured-vehicle h2 {
+    font-size: 25px;
+  }
+
+  #featured-vehicle ul li {
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  #featured-vehicle img {
+    max-width: 80%;
+  }
+
+  .delorean-details {
+    top: 40%;
+    left: 25%;
+    width: 80%;
+  }
+
+  .btn {
+    padding: 10px 15px;
+  }
+
+  #delorean-upgrades {
+    margin-bottom: 0px;
+  }
+
+  #delorean-reviews {
+    flex-direction: row;
+    justify-content: space-evenly;
+    gap: 40px;
+  }
+
+  .upgrade-list {
+    grid-template-columns: repeat(2, 1fr);
+    margin-top: 10px;
+  }
+
+  #wrapper {
+    width: 70%;
+    max-width: 900px;
+  }
 }
