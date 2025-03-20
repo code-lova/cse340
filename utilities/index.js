@@ -41,7 +41,7 @@ Util.buildClassificationGrid = async function (data) {
         vehicle.inv_make +
         " " +
         vehicle.inv_model +
-        'details"><img src="' +
+        'details"><img class="img-classification" src="' +
         vehicle.inv_thumbnail +
         '" alt="Image of ' +
         vehicle.inv_make +
@@ -77,5 +77,46 @@ Util.buildClassificationGrid = async function (data) {
   }
   return grid;
 };
+
+/* **************************************
+ * Build vehicle details view
+ * ************************************ */
+Util.buildVehicleDetails = async function (vehicle) {
+  if (!vehicle) return "<p>Vehicle not found.</p>";
+
+  let details = `<div class="vehicle-details">`;
+
+  // Image section
+  details += `<div class="vehicle-image">
+                  <img src="${vehicle.inv_image}" alt="${vehicle.inv_make} ${vehicle.inv_model}">
+                </div>`;
+
+  // Info section
+  details += `<div class="vehicle-info">
+                  <h2> ${vehicle.inv_make} ${vehicle.inv_model} Details </h2>
+                  <p class="price"><strong>Price:</strong> $${new Intl.NumberFormat(
+                    "en-US"
+                  ).format(vehicle.inv_price)}</p>
+                  <p><strong>Description:</strong> ${
+                    vehicle.inv_description
+                  }</p>
+                  <p class="color"><strong>Color:</strong> ${vehicle.inv_color}</p>
+                  <p><strong>Mileage:</strong> ${new Intl.NumberFormat(
+                    "en-US"
+                  ).format(vehicle.inv_miles)} miles</p>
+                </div>`;
+
+  details += `</div>`;
+
+  return details;
+};
+
+/* ****************************************
+ * Middleware For Handling Errors
+ * Wrap other function in this for
+ * General Error Handling
+ **************************************** */
+Util.handleErrors = (fn) => (req, res, next) =>
+  Promise.resolve(fn(req, res, next)).catch(next);
 
 module.exports = Util;
