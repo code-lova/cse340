@@ -266,10 +266,12 @@ main {
   justify-content: center;
   margin-top: 8px;
 }
+
 .namePrice h2 {
   font-size: 15px;
-  text-align: center;
-  max-width: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-top: 10px;
 }
 
@@ -346,6 +348,10 @@ footer p {
   background: var(--primary-blue);
   color: var(--light-text);
   margin-top: 20px;
+}
+
+footer a {
+  text-decoration: none;
 }
 
 /* ===============================
