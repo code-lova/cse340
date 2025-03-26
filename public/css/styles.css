@@ -9,6 +9,9 @@
   --light-text: #ffff; /* Light white Text */
   --btn-hover: #0d2565;
   --font-body: "Roboto", sans-serif;
+  --flash-notify-error: #d55a5a;
+  --flash-notify-success: #48ab0e;
+
 }
 
 * {
@@ -338,6 +341,133 @@ main {
   margin-bottom: 15px;
   margin-top: 15px;
 }
+
+/* ===============================
+   Login Page Styles
+================================ */
+.form-container {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  background: #f8f8f8;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.form-container h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-weight: bold;
+  margin-top: 10px;
+  color: var(--btn-hover);
+}
+
+input {
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button {
+  margin-top: 20px;
+  padding: 10px;
+  background: var(--primary-blue);
+  color: var(--light-bg);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: var(--btn-hover);
+}
+
+
+.flash-message li{
+  color: var(--flash-notify-success);
+  font-size: 15px;
+  list-style: none;
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.flash-message-error {
+  color: var(--flash-notify-error);
+  font-size: 15px;
+  list-style: none;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.flash-message-success {
+  color: var(--flash-notify-success);
+  font-size: 15px;
+  list-style: none;
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.form-p {
+  text-align: center;
+  margin-top: 10px;
+}
+
+/* Link Styling */
+.form-p a {
+  color: var(--primary-blue);
+  text-decoration: none;
+}
+
+.form-p a:hover {
+  text-decoration: underline;
+}
+
+/* Password Input with Eye Icon */
+.password-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-container input {
+  width: 100%;
+  padding-right: 40px; /* Leave space for the eye icon */
+}
+
+.toggle-password {
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.toggle-password svg {
+  fill: #666;
+  transition: fill 0.3s;
+}
+
+.toggle-password:hover svg {
+  fill: #004080; /* Matches button color */
+}
+
+.password-rule{
+  font-size: 10px;
+  color: var(--flash-notify-error);
+  font-style: italic;
+}
+
 
 /* ===============================
      Footer
