@@ -1,0 +1,22 @@
+<section class="management">
+  <h1><%= title %></h1>
+
+  <h3 class="flash-message"><%- messages() %></h3>
+
+  <% if (errors) { %>
+  <ul class="flash-message-error">
+    <% errors.array().forEach(error => { %>
+    <li><%= error.msg %></li>
+    <% }) %>
+  </ul>
+  <% } %>
+
+  <div class="management-link">
+    <p>
+      <a href="/inv/add-classification">Add New Classification</a>
+    </p>
+    <p>
+      <a href="/inv/add-inventory">Add New Vehicle</a>
+    </p>
+  </div>
+</section>

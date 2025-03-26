@@ -10,8 +10,7 @@
   --btn-hover: #0d2565;
   --font-body: "Roboto", sans-serif;
   --flash-notify-error: #d55a5a;
-  --flash-notify-success: #48ab0e;
-
+  --flash-notify-success: #367d0d;
 }
 
 * {
@@ -93,6 +92,7 @@ nav ul li a {
   color: var(--light-text);
   cursor: pointer;
   text-decoration: none;
+  font-size: 12px;
 }
 
 /* ===============================
@@ -357,6 +357,7 @@ main {
 .form-container h1 {
   text-align: center;
   margin-bottom: 20px;
+  font-size: 25px;
 }
 
 form {
@@ -377,6 +378,35 @@ input {
   border-radius: 4px;
 }
 
+textarea {
+  padding: 4px;
+  width: 100%;
+  font-size: 16px;
+}
+
+select {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  appearance: none;
+  cursor: pointer;
+}
+
+/* Style the dropdown arrow */
+select::-ms-expand {
+  display: none;
+}
+
+select:hover,
+select:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
 button {
   margin-top: 20px;
   padding: 10px;
@@ -391,8 +421,7 @@ button:hover {
   background: var(--btn-hover);
 }
 
-
-.flash-message li{
+.flash-message li {
   color: var(--flash-notify-success);
   font-size: 15px;
   list-style: none;
@@ -454,20 +483,54 @@ button:hover {
 }
 
 .toggle-password svg {
-  fill: #666;
+  color: #666;
   transition: fill 0.3s;
 }
 
 .toggle-password:hover svg {
-  fill: #004080; /* Matches button color */
+  color: #004080; /* Matches button color */
 }
 
-.password-rule{
+.password-rule {
   font-size: 10px;
   color: var(--flash-notify-error);
   font-style: italic;
 }
 
+/* ===============================
+    Vehicle management Styles
+  =============================== */
+.management-link {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-left: 40px;
+  margin-top: 20px;
+}
+.management-link p a {
+  text-decoration: underline;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--primary-blue);
+}
+
+/* ===============================
+    classification form Styles
+  =============================== */
+.classification-container {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  background: #f8f8f8;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.classification-container h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 25px;
+}
 
 /* ===============================
      Footer
@@ -484,7 +547,7 @@ footer a {
   text-decoration: none;
 }
 
-footer .error-link{
+footer .error-link {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -504,6 +567,11 @@ footer .error-link{
   nav ul {
     justify-content: space-evenly;
   }
+
+  nav ul li a {
+    font-size: 18px;
+  }
+  
 
   #featured-vehicle {
     flex-direction: row;

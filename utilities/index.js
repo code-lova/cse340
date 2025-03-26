@@ -100,7 +100,9 @@ Util.buildVehicleDetails = async function (vehicle) {
                   <p><strong>Description:</strong> ${
                     vehicle.inv_description
                   }</p>
-                  <p class="color"><strong>Color:</strong> ${vehicle.inv_color}</p>
+                  <p class="color"><strong>Color:</strong> ${
+                    vehicle.inv_color
+                  }</p>
                   <p><strong>Mileage:</strong> ${new Intl.NumberFormat(
                     "en-US"
                   ).format(vehicle.inv_miles)} miles</p>
@@ -109,6 +111,28 @@ Util.buildVehicleDetails = async function (vehicle) {
   details += `</div>`;
 
   return details;
+};
+
+/* **************************************
+ * Build the classification list HTML
+ * ************************************ */
+Util.buildClassificationList = async function (classification_id = null) {
+  let data = await invModel.getClassifications();
+  let classificationList =
+    '<select name="classification_id" id="classificationList" required>';
+  classificationList += "<option value=''>Choose a Classification</option>";
+  data.rows.forEach((row) => {
+    classificationList += '<option value="' + row.classification_id + '"';
+    if (
+      classification_id != null &&
+      row.classification_id == classification_id
+    ) {
+      classificationList += " selected ";
+    }
+    classificationList += ">" + row.classification_name + "</option>";
+  });
+  classificationList += "</select>";
+  return classificationList;
 };
 
 /* ****************************************
