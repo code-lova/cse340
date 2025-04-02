@@ -8,14 +8,20 @@ const regValidate = require("../utilities/account-validation");
 // Route to serve login view
 router.get("/login", utilities.handleErrors(accountController.buildLogin));
 
-// Process the login attempt temporarly
+// Process the login attempt
 router.post(
   "/login",
   regValidate.loginRules(),
   regValidate.checkLoginData,
-  (req, res) => {
-    res.status(200).send("login process");
-  }
+  utilities.handleErrors(accountController.accountLogin)
+);
+
+// Account management route
+router.get(
+  "/",
+  utilities.checkJWTToken,
+  utilities.checkLogin,
+  utilities.handleErrors(accountController.renderAccountPage)
 );
 
 // Route to build registration view

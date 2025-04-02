@@ -33,6 +33,25 @@ router.post(
   utilities.handleErrors(invController.addInventory)
 );
 
+//Edit inventory route
+router.get(
+  "/getInventory/:classification_id",
+  utilities.handleErrors(invController.getInventoryJSON)
+);
+
+// Edit vehicle inventory by id and show view
+router.get(
+  "/edit/:inv_id",
+  utilities.handleErrors(invController.editInventoryView)
+);
+// Update vehnicle inventory data
+router.post(
+  "/update",
+  managementValidate.inventoryRules(),
+  managementValidate.checkUpdateData,
+  invController.updateInventory
+);
+
 // Route to build inventory by classification view
 router.get(
   "/type/:classificationId",

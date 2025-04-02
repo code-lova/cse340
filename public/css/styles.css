@@ -24,8 +24,25 @@ h1 {
   font-size: 1.3rem;
 }
 
+h3 {
+  color: var(--btn-hover);
+}
+
+h2 {
+  color: var(--btn-hover);
+}
+
 p {
   color: var(--btn-hover);
+}
+
+button:disabled {
+  background-color: var(--accent-silver);
+  color: var(--light-bg);
+  cursor: not-allowed;
+  opacity: 0.6;
+  border: 1px solid var(--accent-silver);
+  box-shadow: none;
 }
 
 body {
@@ -514,6 +531,79 @@ button:hover {
   color: var(--primary-blue);
 }
 
+.management h2 {
+  margin-top: 20px;
+}
+
+.management p {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.width-classificationSelect {
+  width: 250px;
+}
+
+.show-classificionTable {
+  color: var(--primary-blue);
+}
+
+.show-classificionTable table {
+  width: 300px;
+  margin-top: 30px;
+}
+
+.show-classificionTable {
+  margin-top: 20px;
+  overflow-x: auto; /* Ensures responsiveness */
+}
+
+#inventoryDisplay {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #f8f9fa; /* Light gray background */
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+#inventoryDisplay thead {
+  background-color: var(--primary-blue); /* Blue header */
+  color: white;
+  text-transform: uppercase;
+}
+
+#inventoryDisplay th, #inventoryDisplay td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd; /* Light border */
+}
+
+#inventoryDisplay tbody tr:hover {
+  background-color: #e9ecef; /* Hover effect */
+}
+
+#inventoryDisplay a {
+  text-decoration: none;
+  color: var(--btn-hover);
+  font-weight: bold;
+}
+
+#inventoryDisplay a:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}
+
+.noscript-warning {
+  background-color: #ffcccb;
+  color: #900;
+  padding: 10px;
+  text-align: center;
+  font-weight: bold;
+  border: 1px solid red;
+  margin-top: 20px;
+}
+
 /* ===============================
     classification form Styles
   =============================== */
@@ -530,6 +620,14 @@ button:hover {
   text-align: center;
   margin-bottom: 20px;
   font-size: 25px;
+}
+
+/* ===============================
+    Account management page Styles
+  =============================== */
+
+.account-container p {
+  margin-top: 20px;
 }
 
 /* ===============================
@@ -571,7 +669,6 @@ footer .error-link {
   nav ul li a {
     font-size: 18px;
   }
-  
 
   #featured-vehicle {
     flex-direction: row;

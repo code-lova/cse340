@@ -54,6 +54,19 @@ async function insertClassification(classification_name) {
   }
 }
 
+/* ***********************************
+ *   Check for existing classification
+ * *********************************** */
+async function checkExistingClassification(classification_name) {
+  try {
+    const sql = "SELECT * FROM classification WHERE classification_name = $1";
+    const classification = await pool.query(sql, [classification_name]);
+    return classification.rowCount;
+  } catch (error) {
+    return error.message;
+  }
+}
+
 /* *****************************
  *   Add new inventory
  * *************************** */
@@ -91,16 +104,48 @@ async function insertInventory(
   }
 }
 
-/* ***********************************
- *   Check for existing classification
- * *********************************** */
-async function checkExistingClassification(classification_name) {
+/* *****************************
+ *   Update inventory
+ * *************************** */
+async function updateInventory(
+  inv_id,
+  inv_make,
+  inv_model,
+  inv_year,
+  inv_description,
+  inv_image,
+  inv_thumbnail,
+  inv_price,
+  inv_miles,
+  inv_color,
+  classification_id
+) {
   try {
-    const sql = "SELECT * FROM classification WHERE classification_name = $1";
-    const classification = await pool.query(sql, [classification_name]);
-    return classification.rowCount;
+    const sql = `
+    UPDATE inventory 
+    SET inv_make = $1, inv_model = $2, inv_year = $3, inv_description = $4, 
+        inv_image = $5, inv_thumbnail = $6, inv_price = $7, inv_miles = $8, 
+        inv_color = $9, classification_id = $10
+    WHERE inv_id = $11 
+    RETURNING *`;
+
+    const data = await pool.query(sql, [
+      inv_make,
+      inv_model,
+      inv_year,
+      inv_description,
+      inv_image,
+      inv_thumbnail,
+      inv_price,
+      inv_miles,
+      inv_color,
+      classification_id,
+      inv_id,
+    ]);
+    return data.rows[0];
   } catch (error) {
-    return error.message;
+    console.error("model error: " + error);
+    return null;
   }
 }
 
@@ -109,6 +154,7 @@ module.exports = {
   getInventoryByClassificationId,
   getVehicleById,
   insertClassification,
-  insertInventory,
   checkExistingClassification,
+  insertInventory,
+  updateInventory,
 };

@@ -6,6 +6,7 @@
  * Require Statements
  *************************/
 const express = require("express");
+const cookieParser = require("cookie-parser")
 const expressLayouts = require("express-ejs-layouts");
 const env = require("dotenv").config();
 const app = express();
@@ -22,6 +23,7 @@ const pool = require("./database/");
 /* ***********************
  * Middleware
  * ************************/
+
 app.use(
   session({
     store: new (require("connect-pg-simple")(session))({
@@ -34,9 +36,10 @@ app.use(
     name: "sessionId",
   })
 );
-
+app.use(cookieParser())
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(utilities.checkJWTToken)
 
 // Express Messages Middleware
 app.use(require("connect-flash")());
