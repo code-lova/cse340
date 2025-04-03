@@ -362,6 +362,18 @@ main {
 /* ===============================
    Login Page Styles
 ================================ */
+
+.delete-warning {
+  color: var(--flash-notify-error);
+  font-size: 18px;
+  text-align: center;
+}
+
+.password-form{
+  margin-top: 30px;
+}
+
+
 .form-container {
   max-width: 400px;
   margin: 50px auto;
@@ -626,9 +638,11 @@ button:hover {
     Account management page Styles
   =============================== */
 
-.account-container p {
+.account-container p, h3 {
   margin-top: 20px;
 }
+
+
 
 /* ===============================
      Footer

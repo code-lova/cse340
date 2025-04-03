@@ -6,28 +6,44 @@ const utilities = require("../utilities/index");
 const managementValidate = require("../utilities/management-validation");
 
 // Task 1: Management View
-router.get("/", utilities.handleErrors(invController.showManagementView));
+router.get(
+  "/",
+  utilities.authMiddleware,
+  utilities.authorizeAdminOrEmployee,
+  utilities.handleErrors(invController.showManagementView)
+);
 
-// Task 2: Add Classification
+// Task 2: Get Classification View (Restricted)
 router.get(
   "/add-classification",
+  utilities.authMiddleware,
+  utilities.authorizeAdminOrEmployee,
   utilities.handleErrors(invController.showAddClassificationView)
 );
 
+// Add Classification (Restricted)
 router.post(
   "/add-classification",
+  utilities.authMiddleware,
+  utilities.authorizeAdminOrEmployee,
   managementValidate.classificationRules(),
   managementValidate.checkClassificationData,
   utilities.handleErrors(invController.addClassification)
 );
 
-// Task 3: Add Inventory
+// Task 3: Get Inventory view (Restricted)
 router.get(
   "/add-inventory",
+  utilities.authMiddleware,
+  utilities.authorizeAdminOrEmployee,
   utilities.handleErrors(invController.showAddInventoryView)
 );
+
+//  Add Inventory (Restricted)
 router.post(
   "/add-inventory",
+  utilities.authMiddleware,
+  utilities.authorizeAdminOrEmployee,
   managementValidate.inventoryRules(),
   managementValidate.checkInvData,
   utilities.handleErrors(invController.addInventory)
@@ -42,14 +58,34 @@ router.get(
 // Edit vehicle inventory by id and show view
 router.get(
   "/edit/:inv_id",
+  utilities.authMiddleware,
+  utilities.authorizeAdminOrEmployee,
   utilities.handleErrors(invController.editInventoryView)
 );
 // Update vehnicle inventory data
 router.post(
   "/update",
+  utilities.authMiddleware,
+  utilities.authorizeAdminOrEmployee,
   managementValidate.inventoryRules(),
   managementValidate.checkUpdateData,
-  invController.updateInventory
+  utilities.handleErrors(invController.updateInventory)
+);
+
+// Delete confirmation view of vehicle inventory
+router.get(
+  "/delete/:inv_id",
+  utilities.authMiddleware,
+  utilities.authorizeAdminOrEmployee,
+  utilities.handleErrors(invController.deleteInventoryView)
+);
+
+// Delete route to remove the actual vehicle inventory
+router.post(
+  "/delete",
+  utilities.authMiddleware,
+  utilities.authorizeAdminOrEmployee,
+  utilities.handleErrors(invController.deleteInventory)
 );
 
 // Route to build inventory by classification view

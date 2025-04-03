@@ -49,7 +49,7 @@ validate.registationRules = () => {
       .trim()
       .notEmpty()
       .isStrongPassword({
-        minLength: 12,
+        minLength: 8,
         minLowercase: 1,
         minUppercase: 1,
         minNumbers: 1,
@@ -68,10 +68,13 @@ validate.checkRegData = async (req, res, next) => {
 
   if (!errors.isEmpty()) {
     let nav = await utilities.getNav();
+    const account_id = res.locals.accountData.account_id;
+    const account = await accountModel.getAccountById(account_id);
     res.render("account/register", {
       errors,
       title: "Register",
       nav,
+      user: account,
       account_firstname,
       account_lastname,
       account_email,
@@ -127,6 +130,91 @@ validate.checkLoginData = async (req, res, next) => {
       title: "Login",
       nav,
       account_email,
+    });
+    return;
+  }
+  next();
+};
+
+/*  **********************************
+ *  Update user account Data Validation Rules
+ * ********************************* */
+validate.updateAccountRules = () => {
+  return [
+    // Email validation
+    body("account_firstname")
+      .trim()
+      .notEmpty()
+      .withMessage("First name is required."),
+    body("account_lastname")
+      .trim()
+      .notEmpty()
+      .withMessage("Last name is required."),
+    body("account_email")
+      .trim()
+      .isEmail()
+      .withMessage("Invalid email format.")
+      .normalizeEmail(),
+  ];
+};
+
+/* ******************************
+ * Check data and return for update user details
+ * ***************************** */
+validate.checkUpdateAccountData = async (req, res, next) => {
+  const { account_firstname, account_lastname, account_email } = req.body;
+  let errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    let nav = await utilities.getNav();
+    const account_id = res.locals.accountData.account_id;
+    const account = await accountModel.getAccountById(account_id);
+    res.render("account/update-account", {
+      errors,
+      title: "Update Account",
+      nav,
+      user: account,
+      account_firstname,
+      account_lastname,
+      account_email,
+    });
+    return;
+  }
+  next();
+};
+
+/*  **********************************
+ *  Update password for user account Data Validation Rules
+ * ********************************* */
+validate.passwordRules = () => {
+  return [
+    body("account_password")
+      .isLength({ min: 8 })
+      .withMessage("Password must be at least 8 characters long.")
+      .matches(/\d/)
+      .withMessage("Password must contain at least one number.")
+      .matches(/[!@#$%^&*(),.?":{}|<>]/)
+      .withMessage("Password must contain at least one special character."),
+  ];
+};
+
+/* ******************************
+ * Check password and return for update user details
+ * ***************************** */
+validate.checkPasswordData = async (req, res, next) => {
+  const { account_password } = req.body;
+  let errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    let nav = await utilities.getNav();
+    const account_id = res.locals.accountData.account_id;
+    const account = await accountModel.getAccountById(account_id);
+    res.render("account/update-account", {
+      errors,
+      title: "Update Account",
+      nav,
+      user: account,
+      account_password,
     });
     return;
   }

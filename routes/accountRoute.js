@@ -4,6 +4,7 @@ const router = express.Router();
 const utilities = require("../utilities/index");
 const accountController = require("../controllers/accountController");
 const regValidate = require("../utilities/account-validation");
+const accountValidate = require("../utilities/account-validation");
 
 // Route to serve login view
 router.get("/login", utilities.handleErrors(accountController.buildLogin));
@@ -36,6 +37,35 @@ router.post(
   regValidate.registationRules(),
   regValidate.checkRegData,
   utilities.handleErrors(accountController.registerAccount)
+);
+
+// Account update page
+router.get(
+  "/update",
+  utilities.authMiddleware,
+  utilities.handleErrors(accountController.showUpdateAccountView)
+);
+
+router.post(
+  "/update",
+  utilities.authMiddleware,
+  accountValidate.updateAccountRules(),
+  accountValidate.checkUpdateAccountData,
+  utilities.handleErrors(accountController.updateAccountInfo)
+);
+
+router.post(
+  "/update-password",
+  utilities.authMiddleware,
+  accountValidate.passwordRules(),
+  accountValidate.checkPasswordData,
+  utilities.handleErrors(accountController.updatePassword)
+);
+
+router.get(
+  "/logout",
+  utilities.authMiddleware,
+  utilities.handleErrors(accountController.logout)
 );
 
 // Export the router
