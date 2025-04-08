@@ -1,6 +1,7 @@
 const invModel = require("../models/inventory-model");
 const accountModel = require("../models/account-model");
 const utilities = require("../utilities/");
+const commentModel = require("../models/comment-model");
 
 const invCont = {};
 
@@ -42,6 +43,7 @@ invCont.showAddClassificationView = async function (req, res, next) {
  * *************************************** */
 invCont.addClassification = async function (req, res, next) {
   let nav = await utilities.getNav();
+  const classificationSelect = await utilities.buildClassificationList();
   const account_id = res.locals.accountData.account_id;
   const account = await accountModel.getAccountById(account_id);
   const { classification_name } = req.body;
@@ -54,6 +56,7 @@ invCont.addClassification = async function (req, res, next) {
     res.status(201).render("inventory/management", {
       title: "Inventory Management",
       nav,
+      classificationSelect,
       user: account,
       errors: null,
     });
@@ -162,6 +165,7 @@ invCont.buildByClassificationId = async function (req, res, next) {
 invCont.buildByInvId = async function (req, res, next) {
   const invId = req.params.invId;
   const vehicle = await invModel.getVehicleById(invId);
+  const comments = await commentModel.getCommentsByVehicleId(invId);
   let nav = await utilities.getNav();
   let account = null;
 
@@ -175,6 +179,9 @@ invCont.buildByInvId = async function (req, res, next) {
     nav,
     user: account,
     vehicleDetails,
+    comments,
+    invId,
+    vehicle
   });
 };
 
