@@ -1,7 +1,8 @@
-const utilities = require(".");
+const utilities = require("../utilities/");
 const { body, validationResult } = require("express-validator");
 const invModel = require("../models/inventory-model");
 const accountModel = require("../models/account-model");
+const commentModel = require("../models/comment-model");
 
 const validate = {};
 
@@ -24,30 +25,31 @@ validate.commentRules = () => {
  * Check data and return errors
  * ***************************** */
 validate.checkCommentData = async (req, res, next) => {
-  const { comment_text } = req.body;
-  const invId = req.params.invId;
-  const vehicle = await invModel.getVehicleById(invId);
+  const { inv_id } = req.body;
   let errors = validationResult(req);
 
   if (!errors.isEmpty()) {
-    let nav = await utilities.getNav();
-    let account = null;
+    const vehicle = await invModel.getVehicleById(inv_id);
+    const comments = await commentModel.getCommentsByVehicleId(inv_id);
+    const vehicleDetails = await utilities.buildVehicleDetails(vehicle);
 
+    const nav = await utilities.getNav();
     if (res.locals.accountData) {
       const account_id = res.locals.accountData.account_id;
       account = await accountModel.getAccountById(account_id);
     }
-    const vehicleDetails = await utilities.buildVehicleDetails(vehicle);
-    res.render("./inventory/detail", {
-      title: `${vehicle.inv_year} ${vehicle.inv_make} ${vehicle.inv_model}`,
-      errors,
+    return res.render("inventory/detail", {
+      title: `${vehicle.inv_make} ${vehicle.inv_model}`,
       nav,
-      user: account,
       vehicleDetails,
-      comment_text,
+      comments,
+      invId: inv_id,
+      user: account,
+      vehicle,
+      errors,
     });
-    return;
   }
+
   next();
 };
 

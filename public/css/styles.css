@@ -561,6 +561,8 @@ button:hover {
   list-style: none;
   font-weight: bold;
   margin-bottom: 10px;
+  text-align: center;
+
 }
 
 .flash-message-success {

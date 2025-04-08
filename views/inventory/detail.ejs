@@ -1,11 +1,22 @@
 <h1 class="vehicle-detail-title"><%= title %></h1>
+
 <div class="flash-message"><%- messages() %></div>
+
+    <% if (typeof errors !== 'undefined' && errors.array().length > 0) { %>
+        <ul class="flash-message-error">
+        <% errors.array().forEach(error => { %>
+            <li><%= error.msg %></li>
+        <% }); %>
+        </ul>
+    <% } %>
+
 <div class="vehicle-container"><%- vehicleDetails %></div>
+
 <hr>
 
 <h2>Client Comments</h2>
 
-<% if (comments.length > 0) { %>
+<% if (comments && comments.length > 0) { %>
 <ul class="comment-list">
   <% comments.forEach(comment => { %>
   <li>
